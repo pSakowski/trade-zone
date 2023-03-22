@@ -18,7 +18,6 @@ exports.getById = async (req, res) => {
   }
 };
 
-
 exports.create = async (req, res) => {
   try {
     const { title, content, date, photo, price, location, seller } = req.body;
