@@ -6,6 +6,7 @@ const socketIO = require('socket.io');
 const http = require('http');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+require('dotenv').config();
 
 const adsRoutes = require('./routes/ads.routes');
 const authRoutes = require('./routes/auth.routes');
@@ -35,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Configure session middleware
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'defaultsecret',
   store: MongoStore.create({
     mongoUrl: 'mongodb://127.0.0.1:27017/BulletinBoard'
   }),
