@@ -11,7 +11,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
   try {
-    const Ads = await Ads.findById(req.params.id).populate('seller');
+    const ads = await Ads.findById(req.params.id).populate('seller');
     res.json(ads);
   } catch (err) {
     res.status(500).json({ message: err });
@@ -27,7 +27,7 @@ exports.create = async (req, res) => {
       return res.status(400).json({ message: "One or more fields are empty" });
     }
 
-    const ad = new Ad({
+    const ad = new Ads({
       title,
       content,
       date,
