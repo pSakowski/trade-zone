@@ -11,36 +11,49 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
   try {
-    const ad = await Ads.findById(req.params.id).populate('seller');
-    res.json(ad);
+    const Ads = await Ads.findById(req.params.id).populate('seller');
+    res.json(ads);
   } catch (err) {
     res.status(500).json({ message: err });
   }
 };
 
+
 exports.create = async (req, res) => {
-  const { title, content, publicationDate, photo, price, location, seller } = req.body;
-  const ad = new Ads({
-    title,
-    content,
-    publicationDate,
-    photo,
-    price,
-    location,
-    seller,
-  });
   try {
-    const savedAd = await ad.save();
-    res.status(201).json(savedAd);
+    const { title, content, date, photo, price, location, seller } = req.body;
+
+    if (!title || !content || !date || !photo || !price || !location || !seller) {
+      return res.status(400).json({ message: "One or more fields are empty" });
+    }
+
+    const ad = new Ad({
+      title,
+      content,
+      date,
+      photo,
+      price,
+      location,
+      seller
+    });
+
+    await ad.save();
+
+    res.status(201).json({ message: 'Ad created successfully', ad });
   } catch (err) {
-    res.status(500).json({ message: err });
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
 exports.delete = async (req, res) => {
   try {
-    const removedAd = await Ads.deleteOne({ _id: req.params.id });
-    res.json(removedAd);
+    const removedAd = await Ads.findByIdAndRemove(req.params.id);
+    if (removedAd) {
+      res.json({ message: 'Ad successfully deleted', removedAd });
+    } else {
+      res.status(404).json({ message: 'Ad not found' });
+    }
   } catch (err) {
     res.status(500).json({ message: err });
   }
@@ -48,8 +61,8 @@ exports.delete = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const updatedAd = await Ads.updateOne({ _id: req.params.id }, { $set: req.body });
-    res.json(updatedAd);
+    const updatedAd = await Ads.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
+    res.json({ message: "Ad updated successfully", updatedAd });
   } catch (err) {
     res.status(500).json({ message: err });
   }
