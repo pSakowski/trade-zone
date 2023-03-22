@@ -26,7 +26,10 @@ app.use(session({
     mongoUrl: 'mongodb://127.0.0.1:27017/BulletinBoard'
   }),
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV == 'production',
+  }
 }));
 
 // Connect to the database
