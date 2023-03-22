@@ -5,6 +5,10 @@ const path = require('path');
 const socketIO = require('socket.io');
 const http = require('http');
 
+const adsRoutes = require('./routes/ads.routes')
+// const usersRoutes = require('./routes/users.routes');
+// const authRoutes = require('./routes/auth.routes');
+
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -15,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to the database
-mongoose.connect('mongodb://localhost:27017/BulletinBoard', {
+mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
@@ -26,6 +30,11 @@ mongoose.connect('mongodb://localhost:27017/BulletinBoard', {
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+// API routes
+// app.use('/api/users', usersRoutes);
+app.use('/api/ads', adsRoutes);
+// app.use('/auth', authRoutes);
 
 // Serve React app
 app.get('*', (req, res) => {
