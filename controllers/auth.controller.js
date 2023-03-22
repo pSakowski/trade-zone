@@ -26,26 +26,38 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
+
     const { login, password } = req.body;
 
     if (login && typeof login === 'string' && password && typeof password === 'string') {
-      return res.status(400).send({ message: 'Bad request' });
-    }
+      const user = await User.findOne({ login });
 
-    const user = await User.findOne({ login });
-
-    if (!user) {
-      res.status(400).send({ message: 'Login or password are incorrect' });
-    }
-    else {
-      if (bcrypt.compareSync(password, user.password)) {
-        res.status(200).send({ message: 'Login successful' });
+      if (!user) {
+        res.status(400).send({ message: 'Login or password are incorrect' });
       }
       else {
-        res.status(400).send({ message: 'Login or password are incorrect' });
+        if (bcrypt.compareSync(password, user.password)) {
+          req.session.login = user.login;
+          res.status(200).send({ message: 'Login successful' });
+        }
+        else {
+          res.status(400).send({ message: 'Login or password are incorrect' });
+        }
       }
     }
   } catch (err) {
     res.status(500).send({ message: err.message })
+  }
+}
+
+exports.getUser = async (req, res) => {
+  try {
+    if (!req.session.login) {
+      return res.status(401).send({ message: 'You are not authorized!' });
+    }
+    const user = await User.findOne({ login: req.session.login });
+    res.send({ login: user.login });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
   }
 }

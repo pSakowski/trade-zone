@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const socketIO = require('socket.io');
 const http = require('http');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const adsRoutes = require('./routes/ads.routes')
 const authRoutes = require('./routes/auth.routes');
@@ -18,6 +20,14 @@ app.use(cors());
 // Configure body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+  secret: 'xyz567',
+  store: MongoStore.create({
+    mongoUrl: 'mongodb://127.0.0.1:27017/BulletinBoard'
+  }),
+  resave: false,
+  saveUninitialized: false
+}));
 
 // Connect to the database
 mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
