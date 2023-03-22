@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Configure session middleware
 app.use(session({
-  secret: 'xyz567',
+  secret: process.env.SESSION_SECRET,
   store: MongoStore.create({
     mongoUrl: 'mongodb://127.0.0.1:27017/BulletinBoard'
   }),
