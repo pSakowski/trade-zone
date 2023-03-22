@@ -51,13 +51,5 @@ exports.login = async (req, res) => {
 }
 
 exports.getUser = async (req, res) => {
-  try {
-    if (!req.session.login) {
-      return res.status(401).send({ message: 'You are not authorized!' });
-    }
-    const user = await User.findOne({ login: req.session.login });
-    res.send({ login: user.login });
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
+  res.send('Yeah! I\'m logged');
 }
