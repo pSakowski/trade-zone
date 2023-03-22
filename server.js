@@ -6,8 +6,8 @@ const socketIO = require('socket.io');
 const http = require('http');
 
 const adsRoutes = require('./routes/ads.routes')
+const authRoutes = require('./routes/auth.routes');
 // const usersRoutes = require('./routes/users.routes');
-// const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -17,6 +17,7 @@ app.use(cors());
 
 // Configure body parser middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Connect to the database
 mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
@@ -32,13 +33,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // API routes
-// app.use('/api/users', usersRoutes);
-app.use('/api/ads', adsRoutes);
-// app.use('/auth', authRoutes);
+app.use('/api', adsRoutes);
+app.use('/auth', authRoutes);
+// app.use('/api/', usersRoutes);
 
 // Serve React app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
+app.use((req, res) => {
+  res.status(404).send({ message: 'Not found...' });
 });
 
 // Start the server
