@@ -50,3 +50,13 @@ exports.getUser = async (req, res) => {
 
   res.send({ login: req.session.user.login });
 };
+
+
+exports.logout = async (req, res) => {
+  try {
+    req.session.destroy();
+    res.status(200).send({ message: 'Logout successful' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};

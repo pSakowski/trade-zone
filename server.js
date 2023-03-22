@@ -7,19 +7,33 @@ const http = require('http');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-const adsRoutes = require('./routes/ads.routes')
+const adsRoutes = require('./routes/ads.routes');
 const authRoutes = require('./routes/auth.routes');
 // const usersRoutes = require('./routes/users.routes');
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-// Configure cors
-app.use(cors());
+// Connect to the database
+mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Configure body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Configure session middleware
 app.use(session({
   secret: 'xyz567',
   store: MongoStore.create({
@@ -32,18 +46,13 @@ app.use(session({
   }
 }));
 
-// Connect to the database
-mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Connected to the database');
-}).catch((err) => {
-  console.error(err);
-});
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+// Configure cors middleware
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  }));
+}
 
 // API routes
 app.use('/api', adsRoutes);
@@ -55,6 +64,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
+// Handle 404 errors
 app.use((req, res) => {
   res.status(404).send({ message: 'Not found...' });
 });
