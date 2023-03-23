@@ -30,6 +30,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// Serve static files from the /public directory
+app.use(express.static(path.join(__dirname, '/public')));
+
 // Configure body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
