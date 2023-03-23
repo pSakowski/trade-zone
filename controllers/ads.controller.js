@@ -1,4 +1,6 @@
 const Ads = require('../models/Ad.model');
+const fs = require('fs');
+const getImageFileType = require('../utils/getImageFileType');
 
 exports.getAll = async (req, res) => {
   try {
@@ -60,10 +62,38 @@ exports.delete = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const updatedAd = await Ads.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
-    res.json({ message: "Ad updated successfully", updatedAd });
+    const ad = await Ads.findById(req.params.id);
+    if (!ad) {
+      return res.status(404).json({ message: 'Ad not found' });
+    }
+
+    // check if a new photo has been uploaded
+    if (req.file) {
+      const imageFileType = getImageFileType(req.file.originalname);
+      if (!imageFileType) {
+        fs.unlinkSync(req.file.path);
+        return res.status(400).json({ message: 'Invalid image file type' });
+      }
+      // delete previous photo
+      if (ad.photo) {
+        fs.unlinkSync(`./public/${ad.photo}`);
+      }
+      ad.photo = req.file.path;
+    }
+
+    ad.title = req.body.title;
+    ad.content = req.body.content;
+    ad.date = req.body.date;
+    ad.price = req.body.price;
+    ad.location = req.body.location;
+    ad.seller = req.body.seller;
+
+    await ad.save();
+
+    res.json({ message: 'Ad updated successfully', ad });
   } catch (err) {
-    res.status(500).json({ message: err });
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
