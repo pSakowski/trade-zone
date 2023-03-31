@@ -15,23 +15,36 @@ import Register from './components/pages/Register/Register';
 import Logout from './components/pages/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 
-const App = () => (
-  <Container>
-    <NavBar />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/ad/:id" element={<Ad />} />
-      <Route path="/ad/add" element={<AdAdd />} />
-      <Route path="/ad/edit/:id" element={<AdEdit />} />
-      <Route path="/ad/remove/:id" element={<AdRemove />} />
-      <Route path="/search/:searchPhrase" element={<Search />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/logout" element={<Logout />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-    <Footer />
-  </Container>
-);
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAds } from './redux/adsRedux';
+
+function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAds());
+  }, [dispatch]);
+
+  return (
+    <Container>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ad/:id" element={<Ad />} />
+        <Route path="/ad/add" element={<AdAdd />} />
+        <Route path="/ad/edit/:id" element={<AdEdit />} />
+        <Route path="/ad/remove/:id" element={<AdRemove />} />
+        <Route path="/search/:searchPhrase" element={<Search />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Container>
+  )
+}
 
 export default App;
