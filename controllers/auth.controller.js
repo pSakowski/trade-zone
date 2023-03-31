@@ -5,7 +5,7 @@ const getImageFileType = require('../utils/getImageFileType');
 
 exports.register = async (req, res) => {
   try {
-    const { login, password } = req.body;
+    const { login, password, phone } = req.body;
     console.log(req.body, req.file)
 
     if (!login || typeof login !== 'string' || !password || typeof password !== 'string' || !req.file) {
@@ -26,8 +26,8 @@ exports.register = async (req, res) => {
       return res.status(400).send({ message: 'Invalid image file type' });
     }
 
-    const user = await User.create({ login, password: await bcrypt.hash(password, 10), avatar: req.file.filename });
-    res.status(201).send({ message: 'User created' + user.login });
+    const user = await User.create({ login, password: await bcrypt.hash(password, 10), avatar: req.file.filename, phone });
+    res.status(201).send({ message: 'User created ' + user.login });
   } catch (err) {
     fs.unlinkSync(req.file.path);
     res.status(500).send({ message: err.message });
@@ -60,11 +60,15 @@ exports.getUser = async (req, res) => {
     return res.status(401).send({ message: 'You are not authorized!' });
   }
 
-  res.send({ login: req.session.user.login });
+  res.send({ login: req.session.user.login, id: req.session.user.id });
 };
 
 exports.logout = async (req, res) => {
   try {
+    if (!req.session.user || !req.session.user.login) {
+      return res.status(401).send({ message: 'You are not authorized!' });
+    }
+
     req.session.destroy();
     res.status(200).send({ message: 'Logout successful' });
   } catch (err) {

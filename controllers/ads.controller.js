@@ -1,41 +1,56 @@
-const Ads = require('../models/Ad.model');
+const Ad = require('../models/Ad.model');
 const fs = require('fs');
 const getImageFileType = require('../utils/getImageFileType');
 
 exports.getAll = async (req, res) => {
   try {
-    const ads = await Ads.find().populate('seller');
-    res.json(ads);
+    const ads = await Ad.find().populate('seller');
+    console.log(ads);
+    res.status(200).json(ads);
+    
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: err.message });
   }
 };
 
 exports.getById = async (req, res) => {
   try {
-    const ads = await Ads.findById(req.params.id).populate('seller');
+    const ads = await Ad.findById(req.params.id).populate('seller');
     res.json(ads);
   } catch (err) {
     res.status(500).json({ message: err });
   }
 };
 
+// create ads endpoint
 exports.create = async (req, res) => {
   try {
-    const { title, content, date, photo, price, location, seller } = req.body;
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
 
-    if (!title || !content || !date || !photo || !price || !location || !seller) {
+    const { title, content, date, price, location } = req.body;
+    console.log(req.body)
+
+    if (!title || !content || !date || !price || !location) {
       return res.status(400).json({ message: "One or more fields are empty" });
+    }
+
+    const fileType = await getImageFileType(req.file);
+
+    if (!['image/png', 'image/jpeg', 'image/gif'].includes(fileType)) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ message: 'Invalid file type' });
     }
 
     const ad = new Ads({
       title,
       content,
       date,
-      photo,
+      photo: req.file.filename,
       price,
       location,
-      seller
+      seller: req.session.user._id
     });
 
     await ad.save();
@@ -49,7 +64,7 @@ exports.create = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    const removedAd = await Ads.findByIdAndRemove(req.params.id);
+    const removedAd = await Ad.findByIdAndRemove(req.params.id);
     if (removedAd) {
       res.json({ message: 'Ad successfully deleted', removedAd });
     } else {
@@ -62,7 +77,7 @@ exports.delete = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const ad = await Ads.findById(req.params.id);
+    const ad = await Ad.findById(req.params.id);
     if (!ad) {
       return res.status(404).json({ message: 'Ad not found' });
     }
@@ -100,7 +115,7 @@ exports.update = async (req, res) => {
 exports.search = async (req, res) => {
   const searchPhrase = req.params.searchPhrase;
   try {
-    const ads = await Ads.find({ title: { $regex: searchPhrase, $options: 'i' } });
+    const ads = await Ad.find({ title: { $regex: searchPhrase, $options: 'i' } });
     res.json(ads);
   } catch (err) {
     res.status(500).json({ message: err });
