@@ -11,9 +11,9 @@ import AdAdd from './components/features/AdAdd/AdAdd';
 import AdEdit from './components/features/AdEdit/AdEdit';
 import AdRemove from './components/features/AdRemove/AdRemove';
 import Search from './components/features/Search/Search';
-import Login from './components/pages/Login/Login';
 import Register from './components/features/Register/Register';
 import Logout from './components/features/Logout/Logout';
+import Login from './components/features/Login/Login';
 
 function App() {
 
