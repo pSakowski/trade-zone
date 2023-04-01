@@ -5,27 +5,17 @@ import { Container } from 'reactstrap';
 import NavBar from './components/views/NavBar/NavBar'
 import Footer from './components/views/Footer/Footer'
 import Home from './components/pages/Home/Home';
-import Ad from './components/pages/Ad/Ad';
-import AdAdd from './components/pages/AdAdd/AdAdd';
-import AdEdit from './components/pages/AdEdit/AdEdit';
-import AdRemove from './components/pages/AdRemove/AdRemove';
-import Search from './components/pages/Search/Search';
-import Login from './components/pages/Login/Login';
-import Register from './components/pages/Register/Register';
-import Logout from './components/pages/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
-
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchAds } from './redux/adsRedux';
+import Ad from './components/features/Ad/Ad';
+import AdAdd from './components/features/AdAdd/AdAdd';
+import AdEdit from './components/features/AdEdit/AdEdit';
+import AdRemove from './components/features/AdRemove/AdRemove';
+import Search from './components/features/Search/Search';
+import Login from './components/pages/Login/Login';
+import Register from './components/features/Register/Register';
+import Logout from './components/features/Logout/Logout';
 
 function App() {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAds());
-  }, [dispatch]);
 
   return (
     <Container>
