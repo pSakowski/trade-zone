@@ -1,0 +1,10 @@
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+  
+    &:hover {
+        color: #ccc;
+        transition: color 0.5s ease-in-out;
+      }
+    }
