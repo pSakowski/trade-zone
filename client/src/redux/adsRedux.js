@@ -45,8 +45,15 @@ const adsReducer = (state = [], action) => {
   switch (action.type) {
     case LOAD_ADS_SUCCESS:
       // Store ads in localStorage
-      localStorage.setItem('ads', JSON.stringify(action.payload));
-      return action.payload;
+      if (Array.isArray(action.payload)) {
+        localStorage.setItem('ads', JSON.stringify(action.payload));
+        return action.payload;
+      } else if (typeof action.payload === 'object') {
+        const newState = [...state, action.payload];
+        localStorage.setItem('ads', JSON.stringify(newState));
+        return newState;
+      }
+      return state;
     case LOAD_ADS_FAILURE:
       console.log(action.payload);
       return state;
@@ -58,4 +65,3 @@ const adsReducer = (state = [], action) => {
 };
 
 export default adsReducer;
-
