@@ -43,14 +43,14 @@ exports.create = async (req, res) => {
       return res.status(400).json({ message: 'Invalid file type' });
     }
 
-    const ad = new Ads({
+    const ad = new Ad({
       title,
       content,
       date,
       photo: req.file.filename,
       price,
       location,
-      seller: req.session.user._id
+      seller: req.session.user.id
     });
 
     await ad.save();
