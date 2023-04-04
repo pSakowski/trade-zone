@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import styles from './NavBar.module.scss';
 import { getUser } from '../../../redux/usersRedux';
 
-
-
 const NavBar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +24,7 @@ const NavBar = () => {
           <Nav className="justify-content-end flex-grow-1 pe-3" navbar>
             <NavLink href="/">Home</NavLink>
             {!isLoggedIn && <NavLink href="/login">Sign in</NavLink>}
+            {!isLoggedIn && <NavLink href="/register">Register</NavLink>}
             {isLoggedIn && <NavLink href="/logout">Sign out</NavLink>}
             {isLoggedIn && <NavLink href="/ad/add" className="btn btn-success ms-3">Add Ad</NavLink>}
           </Nav>
