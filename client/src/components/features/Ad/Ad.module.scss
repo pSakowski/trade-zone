@@ -1,52 +1,94 @@
 .adContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .adImage {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .adTitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .adContent {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .adDate {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .adPrice {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .adLocation {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .adSeller {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.adDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.adPhoto {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.adInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.adDate {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.adTitle {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.adContent {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.adPrice {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #3c763d;
+}
+
+.sellerDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
+}
+
+.sellerAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 2rem;
+  border: 2px solid #333;
+}
+
+.sellerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sellerLogin {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.sellerPhone {
+  font-size: 1.2rem;
+  color: gray;
+  text-align: center;
+}
