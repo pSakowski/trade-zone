@@ -1,4 +1,4 @@
-.ad-box {
+.adBox {
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -36,5 +36,18 @@
       margin: 0;
       margin-bottom: 5px;
     }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__buttons a {
+    text-decoration: none;
+  }
+
+  &__buttons .btn {
+    margin-right: 10px;
   }
 }

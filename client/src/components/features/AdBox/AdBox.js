@@ -2,28 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
-import styles from './AdBox.module.scss'
+import styles from './AdBox.module.scss';
 import { getUser } from '../../../redux/usersRedux';
+import { IMGS_URL } from '../../../config';
 
-const AdBox = ({ title, img, location, price, _id, seller }) => {
-  const isLoggedIn = useSelector(getUser);
+const AdBox = ({ title, location, price, photo, _id, seller }) => {
+  const loggedInUser = useSelector(getUser);
+  const isLoggedIn = !!loggedInUser;
 
   return (
-    <div className={styles['ad-box']}>
-      <img src={img} alt={title} className={styles['ad-box__img']} />
-
-      <div className={styles['ad-box__info']}>
+    <div className={styles.adBox}>
+      <img src={IMGS_URL + photo} alt={title} className={styles.adBox__img} />
+      <div className={styles.adBox__info}>
         <h2>{title}</h2>
         <p>{location}</p>
-        <p>{price} zł</p>
-
-        <div className="buttons">
+        <p><b>{price} zł</b></p>
+        <div className={styles.adBox__buttons}>
           <Link to={`/ad/${_id}`}>
             <Button className="me-2" color="primary">
               Read more
             </Button>
           </Link>
-          {isLoggedIn && (
+          {isLoggedIn && loggedInUser.login === seller.login && (
             <>
               <Link to={`/ad/edit/${_id}`}>
                 <Button className="me-2" color="warning">
