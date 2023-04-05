@@ -1,18 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchAds, getAdById } from '../../../redux/adsRedux';
+import { getAdById } from '../../../redux/adsRedux';
 import styles from './Ad.module.scss';
 import { IMGS_URL } from '../../../config';
 
 const Ad = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
   const ad = useSelector(state => getAdById(state, id));
-
-  useEffect(() => {
-    dispatch(fetchAds());
-  }, [dispatch]);
 
   return (
     <div className={styles.adContainer}>
