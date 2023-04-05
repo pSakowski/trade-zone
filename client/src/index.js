@@ -7,6 +7,7 @@ import store from './redux/store';
 import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 const Root = () => (
   <Provider store={store}>
