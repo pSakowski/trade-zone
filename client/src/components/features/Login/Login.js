@@ -29,7 +29,7 @@ const Login = () => {
     };
 
     setStatus('loading');
-    fetch(`http://localhost:8000/auth/login`, options)
+    fetch(`http://localhost:8000/api/auth/login`, options)
       .then(res => {
         if (res.status === 200) {
           setStatus('success');
