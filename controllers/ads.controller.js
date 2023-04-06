@@ -7,7 +7,7 @@ exports.getAll = async (req, res) => {
     const ads = await Ad.find().populate('seller');
     console.log(ads);
     res.status(200).json(ads);
-
+    
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -91,9 +91,9 @@ exports.update = async (req, res) => {
       }
       // delete previous photo
       if (ad.photo) {
-        fs.unlinkSync(`./public/uploads/${ad.photo}`);
+        fs.unlinkSync(`./public/${ad.photo}`);
       }
-      ad.photo = req.file.filename;
+      ad.photo = req.file.path;
     }
 
     ad.title = req.body.title;
@@ -101,13 +101,11 @@ exports.update = async (req, res) => {
     ad.date = req.body.date;
     ad.price = req.body.price;
     ad.location = req.body.location;
-    ad.seller = req.body.seller ? JSON.parse(req.body.seller) : ad.seller;
+    ad.seller = req.body.seller;
 
     await ad.save();
 
-    const updatedAd = await Ad.findById(req.params.id);
-
-    res.json({ message: 'Ad updated successfully', ad: updatedAd });
+    res.json({ message: 'Ad updated successfully', ad });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
