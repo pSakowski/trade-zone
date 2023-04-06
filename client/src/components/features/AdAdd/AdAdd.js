@@ -8,7 +8,7 @@ const AdAdd = () => {
   const [content, setContent] = useState('');
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [price, setPrice] = useState('');
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState('');
   const [photo, setPhoto] = useState(null);
   const [status, setStatus] = useState(null);
 
@@ -38,7 +38,7 @@ const AdAdd = () => {
 
       const response = await axios.post(`${API_URL}/api/ads`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
+        credentials: 'include'
       });
 
       if (response.status === 201) {
