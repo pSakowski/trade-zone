@@ -10,7 +10,6 @@ import Ad from './components/features/Ad/Ad';
 import AdAdd from './components/features/AdAdd/AdAdd';
 import AdEdit from './components/features/AdEdit/AdEdit';
 import AdRemove from './components/features/AdRemove/AdRemove';
-import Search from './components/features/Search/Search';
 import Register from './components/features/Register/Register';
 import Logout from './components/features/Logout/Logout';
 import Login from './components/features/Login/Login';
@@ -26,7 +25,6 @@ function App() {
         <Route path="/ad/add" element={<AdAdd />} />
         <Route path="/ad/edit/:id" element={<AdEdit />} />
         <Route path="/ad/remove/:id" element={<AdRemove />} />
-        <Route path="/search/:searchPhrase" element={<Search />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
