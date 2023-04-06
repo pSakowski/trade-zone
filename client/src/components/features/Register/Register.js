@@ -29,7 +29,7 @@ const Register = () => {
     };
 
     setStatus('loading');
-    fetch(`${API_URL}/auth/register`, options)
+    fetch(`http://localhost:8000/auth/register`, options)
       .then(res => {
         if (res.status === 201) {
           setStatus('success');

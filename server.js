@@ -16,16 +16,17 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 // Connect to the database
-mongoose.connect('mongodb://127.0.0.1:27017/BulletinBoard', {
+// Remote database connection string
+const remoteDbUrl = 'mongodb+srv://pees1:pees1@cluster0.hawsg2s.mongodb.net/BulletinBoard?retryWrites=true&w=majority';
+
+// Connect to the database
+mongoose.connect(remoteDbUrl, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 })
-  .then(() => {
-    console.log('Connected to the database');
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+  .then(() => console.log('Connected to database'))
+  .catch(err => console.error('Error connecting to database', err));
+
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -35,13 +36,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Configure body parser middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 // Configure session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET || 'defaultsecret',
   store: MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/BulletinBoard'
+    mongoUrl: remoteDbUrl
   }),
   resave: false,
   saveUninitialized: false,
