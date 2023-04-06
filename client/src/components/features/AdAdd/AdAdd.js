@@ -38,7 +38,7 @@ const AdAdd = () => {
 
       const response = await axios.post(`${API_URL}/api/ads`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        credentials: 'include'
+        withCredentials: true,
       });
 
       if (response.status === 201) {

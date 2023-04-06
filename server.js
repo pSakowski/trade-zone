@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Configure body parser middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // Configure session middleware
 app.use(session({
