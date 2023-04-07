@@ -52,10 +52,12 @@ app.use(session({
 }));
 
 // Configure cors middleware
-app.use(cors({
-  origin: ['https://bulletin-board-fullstack.psakowski1213.repl.co'],
-  credentials: true,
-}));
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  }));
+}
 
 // API routes
 app.use('/api', adsRoutes);

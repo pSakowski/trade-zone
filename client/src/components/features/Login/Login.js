@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import { useState } from 'react';
-import { API_URL } from '../../../config';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../redux/usersRedux';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +28,7 @@ const Login = () => {
     };
 
     setStatus('loading');
-    fetch(`${process.env.API_URL}/auth/login`, options)
+    fetch(`/auth/login`, options)
       .then(res => {
         if (res.status === 200) {
           setStatus('success');

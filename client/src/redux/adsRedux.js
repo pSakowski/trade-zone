@@ -1,5 +1,6 @@
-import { API_URL } from '../config';
+
 import axios from 'axios';
+import { API_URL } from '../config';
 
 /* SELECTORS */
 export const getAds = state => state.ads;
@@ -31,7 +32,7 @@ export const fetchAds = () => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      let res = await axios.get(`http://localhost:8000/api/ads`);
+      let res = await axios.get(`${API_URL}/api/ads`);
       dispatch(loadAdsSuccess(res.data));
       dispatch(endRequest());
     } catch (error) {
