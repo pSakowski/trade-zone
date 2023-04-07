@@ -60,8 +60,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // API routes
-app.use('/api', adsRoutes);
-app.use('/auth', authRoutes);
+// API routes
+app.use(`${process.env.API_URL}/api`, adsRoutes);
+app.use(`${process.env.API_URL}/auth`, authRoutes);
 // app.use('/api/', usersRoutes);
 
 // Serve React app
