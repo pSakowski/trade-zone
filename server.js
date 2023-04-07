@@ -56,14 +56,13 @@ app.use(session({
 );
 
 // Configure cors middleware
-if (process.env.NODE_ENV !== 'production') {
 app.use(
   cors({
-    origin: ['*'],
-    credentials: 'include',
+    origin: '*',
+    credentials: true,
+    exposedHeaders: ['Access-Control-Allow-Origin']
   })
 );
-}
 
 // API routes
 app.use('/api', adsRoutes);
