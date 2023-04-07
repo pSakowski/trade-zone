@@ -62,7 +62,7 @@ const AdEdit = () => {
 
       const response = await axios.put(`/api/ads/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
+        credentials: 'include',
       });
 
       if (response.status === 200) {
