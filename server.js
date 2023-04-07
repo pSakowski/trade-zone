@@ -15,7 +15,7 @@ const port = process.env.PORT || 8000;
 
 // Connect to the database
 // Remote database connection string
-const remoteDbUrl = process.env.MONGO ;
+const remoteDbUrl = 'mongodb+srv://pees1:pees1@cluster0.hawsg2s.mongodb.net/BulletinBoard?retryWrites=true&w=majority';
 
 // Connect to the database
 mongoose.connect(remoteDbUrl, {
@@ -57,12 +57,12 @@ app.use(session({
 
 // Configure cors middleware
 if (process.env.NODE_ENV !== 'production') {
-  app.use(
-    cors({
-      origin: ['http://localhost:3000'],
-      credentials: true,
-    })
-  );
+app.use(
+  cors({
+    origin: ['*'],
+    credentials: 'include',
+  })
+);
 }
 
 // API routes
