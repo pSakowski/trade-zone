@@ -52,17 +52,14 @@ app.use(session({
 }));
 
 // Configure cors middleware
-if (process.env.NODE_ENV !== 'production') {
-  app.use(cors({
-    origin: ['http://localhost:3000'],
-    credentials: true,
-  }));
-}
+app.use(cors({
+  origin: ['https://bulletin-board-fullstack.psakowski1213.repl.co'],
+  credentials: true,
+}));
 
 // API routes
-// API routes
-app.use(`${process.env.API_URL}/api`, adsRoutes);
-app.use(`${process.env.API_URL}/auth`, authRoutes);
+app.use('/api', adsRoutes);
+app.use('/auth', authRoutes);
 // app.use('/api/', usersRoutes);
 
 // Serve React app
