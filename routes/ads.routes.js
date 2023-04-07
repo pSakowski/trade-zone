@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ads = require('../controllers/ads.controller');
 const imageUpload = require('../utils/imageUpload');
-const authMiddleware = require('../utils/authMiddleware');
 
 router.get('/ads', ads.getAll);
 router.get('/ads/:id', ads.getById);

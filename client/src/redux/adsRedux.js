@@ -23,10 +23,8 @@ export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = payload => ({ payload, type: ERROR_REQUEST });
 
-export const addAd = payload => ({ payload, type: ADD_AD });
 export const loadAdsSuccess = payload => ({ payload, type: LOAD_ADS_SUCCESS });
 export const loadAdsFailure = payload => ({ payload, type: LOAD_ADS_FAILURE });
-export const editAd = payload => ({ payload, type: EDIT_AD });
 
 export const fetchAds = () => {
   return async dispatch => {

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import { useState } from 'react';
+import { API_URL } from '../../../config';
 
 const Register = () => {
 
@@ -28,7 +29,7 @@ const Register = () => {
     };
 
     setStatus('loading');
-    fetch(`/auth/register`, options)
+    fetch(`${API_URL}/auth/register`, options)
       .then(res => {
         if (res.status === 201) {
           setStatus('success');

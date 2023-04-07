@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../redux/usersRedux';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../../config'
 
 const Login = () => {
 
@@ -28,7 +29,7 @@ const Login = () => {
     };
 
     setStatus('loading');
-    fetch(`/auth/login`, options)
+    fetch(`${API_URL}/auth/login`, options)
       .then(res => {
         if (res.status === 200) {
           setStatus('success');
