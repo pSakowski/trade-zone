@@ -27,7 +27,7 @@ mongoose.connect(remoteDbUrl, {
 
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // Serve static files from the /public directory
 app.use(express.static(path.join(__dirname, '/public')));
@@ -66,7 +66,7 @@ app.use('/auth', authRoutes);
 
 // Serve React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 // Handle 404 errors
