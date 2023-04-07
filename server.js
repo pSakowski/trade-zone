@@ -15,7 +15,7 @@ const port = process.env.PORT || 8000;
 
 // Connect to the database
 // Remote database connection string
-const remoteDbUrl = MONGO_URL;
+const remoteDbUrl = process.env.MONGO ;
 
 // Connect to the database
 mongoose.connect(remoteDbUrl, {
@@ -59,7 +59,7 @@ app.use(session({
 if (process.env.NODE_ENV !== 'production') {
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: ['*'],
     credentials: true,
   })
 );
