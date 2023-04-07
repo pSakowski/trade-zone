@@ -13,8 +13,16 @@ import AdRemove from './components/features/AdRemove/AdRemove';
 import Register from './components/features/Register/Register';
 import Logout from './components/features/Logout/Logout';
 import Login from './components/features/Login/Login';
+import { useEffect } from 'react';
+import { fetchAds } from './redux/adsRedux';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAds());
+  }, [dispatch]);
 
   return (
     <Container>
