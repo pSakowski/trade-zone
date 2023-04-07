@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
 import styles from './AdBox.module.scss';
 import { getUser } from '../../../redux/usersRedux';
-import { IMGS_URL } from '../../../config';
+import { IMGS_URL } from '../../../URL';
+
 
 const AdBox = ({ title, location, price, photo, _id, seller }) => {
   const loggedInUser = useSelector(getUser);

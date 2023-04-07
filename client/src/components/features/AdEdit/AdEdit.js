@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
-import { API_URL } from '../../../config';
+
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getAdById } from '../../../redux/adsRedux';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../../redux/usersRedux';
+import { API_URL } from '../../../URL';
 
 const AdEdit = () => {
   const { id } = useParams();

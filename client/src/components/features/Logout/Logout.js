@@ -1,8 +1,9 @@
-import { API_URL } from '../../../config';
+
 import { logOut } from '../../../redux/usersRedux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../../URL';
 
 const Logout = () => {
 

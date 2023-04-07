@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
-
 import axios from 'axios';
-import { API_URL } from '../../../config';
+import { API_URL } from '../../../URL'
 
 const AdAdd = () => {
   const [title, setTitle] = useState('');

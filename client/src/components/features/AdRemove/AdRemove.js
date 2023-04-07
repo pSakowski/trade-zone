@@ -3,10 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getUser } from '../../../redux/usersRedux';
 import axios from 'axios';
-
 import { getAdById } from '../../../redux/adsRedux';
 import { Alert, Button } from 'react-bootstrap';
-import { API_URL } from '../../../config';
+import { API_URL } from '../../../URL';
+
 
 const AdRemove = () => {
   const { id } = useParams();
