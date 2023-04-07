@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getUser } from '../../../redux/usersRedux';
 import axios from 'axios';
-import { API_URL } from '../../../config';
+
 import { getAdById } from '../../../redux/adsRedux';
 import { Alert, Button } from 'react-bootstrap';
+import { API_URL } from '../../../config';
 
 const AdRemove = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const AdRemove = () => {
 
   const handleRemove = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8000/api/ads/${id}`);
+      const response = await axios.delete(`${API_URL}/api/ads/${id}`);
       if (response.status === 200) {
         setStatus('success');
         setTimeout(() => navigate('/'));
