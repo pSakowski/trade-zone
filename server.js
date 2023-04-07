@@ -15,7 +15,7 @@ const port = process.env.PORT || 8000;
 
 // Connect to the database
 // Remote database connection string
-const remoteDbUrl = 'mongodb+srv://pees1:pees1@cluster0.hawsg2s.mongodb.net/BulletinBoard?retryWrites=true&w=majority';
+const remoteDbUrl = MONGO_URL;
 
 // Connect to the database
 mongoose.connect(remoteDbUrl, {
