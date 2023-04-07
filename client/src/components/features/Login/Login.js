@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../redux/usersRedux';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../../../config'
+import { API_URL } from '../../../URL'
 
 const Login = () => {
 
