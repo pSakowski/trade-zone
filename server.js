@@ -40,23 +40,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   store: MongoStore.create({
-    mongoUrl: remoteDbUrl
+    mongoUrl: remoteDbUrl,
+    mongoOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+    collectionName: 'sessions',
+    cookie: {
+      secure: process.env.NODE_ENV == 'production',
+    },
   }),
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV == 'production',
-  }
-}));
+})
+);
 
 // Configure cors middleware
 if (process.env.NODE_ENV !== 'production') {
-  app.use(
-    cors({
-      origin: ['http://localhost:3000'],
-      credentials: true,
-    })
-  );
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  })
+);
 }
 
 // API routes

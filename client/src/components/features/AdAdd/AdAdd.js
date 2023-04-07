@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import { API_URL } from '../../../URL'
+import { API_URL } from '../../../config';
 
 const AdAdd = () => {
   const [title, setTitle] = useState('');
@@ -36,7 +36,7 @@ const AdAdd = () => {
 
       setStatus('loading');
 
-      const response = await axios.post(`${API_URL}/api/ads`, formData, {
+      const response = await axios.post(`/api/ads`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });

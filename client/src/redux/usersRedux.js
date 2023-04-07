@@ -21,14 +21,14 @@ const usersReducer = (statePart = null, action) => {
     case LOG_IN:
       // Store user in localStorage
       localStorage.setItem('user', JSON.stringify(action.payload));
-      return action.payload
+      return action.payload;
     case LOG_OUT:
       localStorage.removeItem('user');
       return null;
     default:
       // Retrieve user from localStorage
       const savedState = localStorage.getItem('user');
-      return savedState ? JSON.parse(savedState) : statePart;
+      return savedState && savedState !== 'undefined' ? JSON.parse(savedState) : statePart;
   }
 };
 

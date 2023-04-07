@@ -5,8 +5,7 @@ import { getUser } from '../../../redux/usersRedux';
 import axios from 'axios';
 import { getAdById } from '../../../redux/adsRedux';
 import { Alert, Button } from 'react-bootstrap';
-import { API_URL } from '../../../URL';
-
+import { API_URL } from '../../../config';
 
 const AdRemove = () => {
   const { id } = useParams();

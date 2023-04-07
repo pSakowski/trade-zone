@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { getAdById } from '../../../redux/adsRedux';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../../redux/usersRedux';
-import { API_URL } from '../../../URL';
+import { API_URL } from '../../../config';
 
 const AdEdit = () => {
   const { id } = useParams();
@@ -60,7 +60,7 @@ const AdEdit = () => {
 
       setStatus('loading');
 
-      const response = await axios.put(`${API_URL}/api/ads/${id}`, formData, {
+      const response = await axios.put(`/api/ads/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });

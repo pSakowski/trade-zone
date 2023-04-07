@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAds, getAds } from '../../../redux/adsRedux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getAds } from '../../../redux/adsRedux';
 import AdBox from '../../features/AdBox/AdBox';
 
 const Home = () => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const ads = useSelector(getAds);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAds());
-  }, [dispatch]);
 
   const filteredAds = ads.filter(ad =>
     ad.title.toLowerCase().includes(searchPhrase.toLowerCase())

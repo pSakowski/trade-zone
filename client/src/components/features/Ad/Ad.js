@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAdById } from '../../../redux/adsRedux';
 import styles from './Ad.module.scss';
-import { IMGS_URL } from '../../../URL';
+import { IMGS_URL } from '../../../config';
 
 const Ad = () => {
   const { id } = useParams();
