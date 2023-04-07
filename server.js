@@ -47,13 +47,14 @@ app.use(session({
     },
     collectionName: 'sessions',
     cookie: {
-      secure: process.env.NODE_ENV == 'production',
+      secure: false,
+      sameSite: 'none',
     },
   }),
   resave: false,
   saveUninitialized: false,
-})
-);
+}));
+
 
 // Configure cors middleware
 app.use(
