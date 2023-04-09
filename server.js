@@ -52,7 +52,7 @@ app.use(session({
 
 // Configure cors middleware
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials: true
 }));
 
