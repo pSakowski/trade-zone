@@ -4,27 +4,22 @@ const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-require('dotenv').config();
 
 const adsRoutes = require('./routes/ads.routes');
 const authRoutes = require('./routes/auth.routes');
-// const usersRoutes = require('./routes/users.routes');
 
 const app = express();
 const port = process.env.PORT || 8000;
 
 // Connect to the database
-// Remote database connection string
 const remoteDbUrl = 'mongodb+srv://pees1:pees1@cluster0.hawsg2s.mongodb.net/BulletinBoard?retryWrites=true&w=majority';
 
-// Connect to the database
 mongoose.connect(remoteDbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => console.log('Connected to database'))
   .catch(err => console.error('Error connecting to database', err));
-
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
@@ -38,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Configure session middleware
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'qwe123',
   store: MongoStore.create({
     mongoUrl: remoteDbUrl,
     mongoOptions: {
@@ -55,20 +50,15 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-
 // Configure cors middleware
-app.use(
-  cors({
-    origin: '*',
-    credentials: true,
-    exposedHeaders: ['Access-Control-Allow-Origin']
-  })
-);
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 
 // API routes
 app.use('/api', adsRoutes);
 app.use('/auth', authRoutes);
-// app.use('/api/', usersRoutes);
 
 // Serve React app
 app.get('*', (req, res) => {
