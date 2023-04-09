@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 // Connect to the database
-const remoteDbUrl = 'mongodb+srv://pees1:pees1@cluster0.hawsg2s.mongodb.net/BulletinBoard?retryWrites=true&w=majority';
+const remoteDbUrl = process.env.MONGODB_URI;
 
 mongoose.connect(remoteDbUrl, {
   useNewUrlParser: true,
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Configure session middleware
 app.use(session({
-  secret: 'qwe123',
+  secret: process.env.SESSION_SECRET,
   store: MongoStore.create({
     mongoUrl: remoteDbUrl,
     mongoOptions: {
@@ -52,7 +52,7 @@ app.use(session({
 
 // Configure cors middleware
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials: true
 }));
 
