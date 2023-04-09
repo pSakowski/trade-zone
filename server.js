@@ -51,7 +51,10 @@ app.use(session({
 }));
 
 // Configure cors middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 
 // API routes
 app.use('/api', adsRoutes);
