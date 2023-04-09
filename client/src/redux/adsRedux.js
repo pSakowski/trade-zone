@@ -31,7 +31,7 @@ export const fetchAds = () => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      let res = await axios.get(`${API_URL}/api/ads`);
+      let res = await axios.get(`${API_URL}/ads`);
       dispatch(loadAdsSuccess(res.data));
       dispatch(endRequest());
     } catch (error) {
