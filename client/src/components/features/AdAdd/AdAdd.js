@@ -36,7 +36,7 @@ const AdAdd = () => {
 
       setStatus('loading');
 
-      const response = await axios.post(`${API_URL}add`, formData, {
+      const response = await axios.post(`${API_URL}api/ad/add`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         credentials: 'include',
       });
