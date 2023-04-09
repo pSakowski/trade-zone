@@ -60,7 +60,7 @@ const AdEdit = () => {
 
       setStatus('loading');
 
-      const response = await axios.put(`${API_URL}/api/ads/${id}`, formData, {
+      const response = await axios.put(`${API_URL}api/ad/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         credentials: 'include',
       });
