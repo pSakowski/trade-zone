@@ -51,10 +51,7 @@ app.use(session({
 }));
 
 // Configure cors middleware
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
+app.use(cors());
 
 // API routes
 app.use('/api', adsRoutes);
