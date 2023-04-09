@@ -17,7 +17,7 @@ const AdRemove = () => {
 
   const handleRemove = async () => {
     try {
-      const response = await axios.delete(`${API_URL}api/ad/${id}`);
+      const response = await axios.delete(`${API_URL}api/ad/remove/${id}`);
       if (response.status === 200) {
         setStatus('success');
         setTimeout(() => navigate('/'));
