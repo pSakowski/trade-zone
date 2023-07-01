@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+require('dotenv').config();
 
 const adsRoutes = require('./routes/ads.routes');
 const authRoutes = require('./routes/auth.routes');
@@ -12,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 // Connect to the database
-const remoteDbUrl = process.env.MONGODB_URI;
+const remoteDbUrl = process.env.DB_URL;
 
 mongoose.connect(remoteDbUrl, {
   useNewUrlParser: true,

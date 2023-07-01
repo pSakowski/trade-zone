@@ -17,7 +17,7 @@ const NavBar = () => {
     <div>
       <Navbar color="dark" dark expand="md">
         <NavbarBrand href="/">
-          <span className={styles['navbar-brand']}>Bulletin Board</span>
+          <span className={styles['navbar-brand']}>TradeZone</span>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
